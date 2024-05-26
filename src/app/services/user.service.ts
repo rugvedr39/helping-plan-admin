@@ -24,4 +24,8 @@ export class UserService {
   genrateEpin(body: any) {
     return this.http.post(this.apiUrl + "epin/createEpin", body);
   }
+  updateUser(user: any): Observable<any> {
+    const url = `${this.apiUrl}/users/${user.id}`;
+    return this.http.put(url, user);
+  }
 }

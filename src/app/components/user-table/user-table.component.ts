@@ -15,6 +15,10 @@ export class UserTableComponent implements OnInit {
   searchQuery: string = "";
   count: number = 0;
   userId: number = 0;
+  editUserName: any;
+  editUserMobile: any;
+  editUserUpi: any;
+  editedUser: any;
 
   constructor(private userService: UserService) {}
 
@@ -63,5 +67,29 @@ export class UserTableComponent implements OnInit {
           alert(data.message);
         }
       });
+  }
+  setEditUser(user: any) {
+    this.editedUser = user;
+    this.editUserName = user.name;
+    this.editUserMobile = user.mobile_number;
+    this.editUserUpi = user.upi_number;
+  }
+  updateUserDetails() {
+    const updatedUser = {
+      id: this.editedUser.id,
+      name: this.editUserName,
+      mobile_number: this.editUserMobile,
+      upi_number: this.editUserUpi,
+    };
+    this.userService.updateUser(updatedUser).subscribe(
+      (response: any) => {
+        console.log("User updated:", response);
+        const editUserModal = document.getElementById("editUserModal");
+        alert("User Updated SuccessFully");
+      },
+      (error: any) => {
+        console.error("Error updating user:", error);
+      },
+    );
   }
 }

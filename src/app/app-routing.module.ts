@@ -4,13 +4,14 @@ import { LoginComponent } from "./login/login.component";
 import { HomeComponent } from "./home/home.component";
 import { UserTableComponent } from "./components/user-table/user-table.component";
 import { EpinsComponent } from "./epins/epins.component";
+import { authGuard } from "./auth.guard";
 
 const routes: Routes = [
-  { path: "", redirectTo: "/login", pathMatch: "full" },
+  { path: "", redirectTo: "home", pathMatch: "full" },
   { path: "login", component: LoginComponent },
-  { path: "home", component: HomeComponent },
-  { path: "user", component: UserTableComponent },
-  { path: "epin", component: EpinsComponent },
+  { path: "home", component: HomeComponent, canActivate: [authGuard] },
+  { path: "user", component: UserTableComponent, canActivate: [authGuard] },
+  { path: "epin", component: EpinsComponent, canActivate: [authGuard] },
 ];
 
 @NgModule({

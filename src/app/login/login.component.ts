@@ -16,6 +16,7 @@ export class LoginComponent {
 
   login() {
     if (this.username === "admin" && this.password === "123456") {
+      localStorage.setItem("login", "true");
       this.router.navigate(["/home"]);
     } else {
       this.errorMessage = "Invalid credentials";
