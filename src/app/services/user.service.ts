@@ -6,8 +6,8 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export class UserService {
-  // private apiUrl = "http://localhost:3000/api/";
-  private apiUrl = "https://helpingplan.online/api/";
+  private apiUrl = "http://localhost:3000/api/";
+  // private apiUrl = "https://helpingplan.online/api/";
 
   constructor(private http: HttpClient) {}
 
@@ -25,7 +25,19 @@ export class UserService {
     return this.http.post(this.apiUrl + "epin/createEpin", body);
   }
   updateUser(user: any): Observable<any> {
-    const url = `${this.apiUrl}/users/${user.id}`;
+    const url = `${this.apiUrl}admin/users/${user.id}`;
     return this.http.put(url, user);
+  }
+
+  async getCounts(): Promise<any> {
+    try {
+      const counts = await this.http
+        .get(this.apiUrl + "admin/usersCount")
+        .toPromise();
+      return counts;
+    } catch (error) {
+      console.error("Error fetching user counts:", error);
+      throw error;
+    }
   }
 }
