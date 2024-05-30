@@ -18,6 +18,8 @@
                     <th scope="col">#</th>
                     <th scope="col">Username</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Password</th>
+
                     <th scope="col">Mobile</th>
                     <th scope="col">UPI Number</th>
                     <th scope="col">Referd By</th>
@@ -36,6 +38,7 @@
                     </th>
                     <td>{{ user.username }}</td>
                     <td>{{ user.name }}</td>
+                    <td>{{ user.password }}</td>
                     <td>{{ user.mobile_number }}</td>
                     <td>{{ user.upi_number }}</td>
                     <td>{{ user.Referrer?.username }}</td>
@@ -172,6 +175,15 @@
                         class="form-control"
                         id="editMobile"
                         [(ngModel)]="editUserMobile"
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="editMobile">password</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="editMobile"
+                        [(ngModel)]="editUserpassword"
                     />
                 </div>
                 <div class="form-group">

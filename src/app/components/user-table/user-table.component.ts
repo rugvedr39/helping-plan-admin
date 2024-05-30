@@ -19,6 +19,7 @@ export class UserTableComponent implements OnInit {
   editUserMobile: any;
   editUserUpi: any;
   editedUser: any;
+  editUserpassword: any;
 
   constructor(private userService: UserService) {}
 
@@ -73,6 +74,7 @@ export class UserTableComponent implements OnInit {
     this.editUserName = user.name;
     this.editUserMobile = user.mobile_number;
     this.editUserUpi = user.upi_number;
+    this.editUserpassword = user.password;
   }
   updateUserDetails() {
     const updatedUser = {
@@ -80,6 +82,7 @@ export class UserTableComponent implements OnInit {
       name: this.editUserName,
       mobile_number: this.editUserMobile,
       upi_number: this.editUserUpi,
+      password: this.editUserpassword,
     };
     this.userService.updateUser(updatedUser).subscribe(
       (response: any) => {
