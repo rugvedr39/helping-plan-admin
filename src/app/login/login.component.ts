@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
+import { UserService } from "../services/user.service";
 
 @Component({
   selector: "app-login",
@@ -12,14 +13,20 @@ export class LoginComponent {
   user: any = null;
   errorMessage: string = "";
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,private userService: UserService) {}
 
   login() {
-    if (this.username === "admin" && this.password === "123456") {
-      localStorage.setItem("login", "true");
-      this.router.navigate(["/home"]);
-    } else {
-      this.errorMessage = "Invalid credentials";
-    }
-  }
+    this.userService.getPassword().subscribe({
+      next: (response) => {
+       if(this.username === "admin" && this.password === response.password){
+         localStorage.setItem("login", "true");
+         this.router.navigate(["/home"]);
+       }else {
+        this.errorMessage = "Invalid credentials";
+      }
+      },
+      error: (error) => {
+        console.error("Error fetching user", error);
+      },
+    });}
 }

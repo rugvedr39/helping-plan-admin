@@ -40,4 +40,11 @@ export class UserService {
       throw error;
     }
   }
+
+  getPassword():Observable<any> {
+    return this.http.get(this.apiUrl + "admin/getPassword");
+  }
+  setPassword(body: any): Observable<any> {
+    return this.http.post(this.apiUrl + "admin/updatePassword", body);
+  }
 }
