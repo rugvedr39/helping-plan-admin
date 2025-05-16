@@ -6,8 +6,8 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export class UserService {
-  // private apiUrl = "http://localhost:3000/api/";
-  private apiUrl = "https://helpingplan.online/api/";
+  private apiUrl = "http://localhost:4000/api/";
+  // private apiUrl = "https://helping.rrinstitute.cloud/api/";
 
   constructor(private http: HttpClient) {}
 
@@ -47,4 +47,14 @@ export class UserService {
   setPassword(body: any): Observable<any> {
     return this.http.post(this.apiUrl + "admin/updatePassword", body);
   }
+
+  getComunicationData(): Observable<any> {
+    return this.http.get(`${this.apiUrl}admin/getAdminDetails`);
+  }
+
+   saveMeetingDetails(data: any) {
+    return this.http.post(`${this.apiUrl}admin/save-meeting-details`, data);
+  }
+
+
 }
